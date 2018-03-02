@@ -12,14 +12,17 @@ namespace Library
         {
             get; set;
         }
+
         public string FirstName
         {
             get; set;
         }
+
         public string Surname
         {
             get; set;
         }
+
         public string Telephone
         {
             get; set;
