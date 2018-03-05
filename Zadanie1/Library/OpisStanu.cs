@@ -5,7 +5,7 @@ using System.Text;
 //klasa opisująca stan książek
 namespace Library
 {
-    class OpisStanu
+    public class OpisStanu
     {
         public string BookDescription
         {

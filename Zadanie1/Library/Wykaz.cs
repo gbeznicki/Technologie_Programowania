@@ -6,7 +6,7 @@ using System.Text;
 //klasa opisująca wykaz klientów
 namespace Library
 {
-    class Wykaz
+    public class Wykaz
     {
         public int Age
         {

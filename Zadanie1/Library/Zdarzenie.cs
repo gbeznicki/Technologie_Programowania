@@ -4,7 +4,7 @@ using System.Text;
 //klasa opisujaca wypozyczenia
 namespace Library
 {
-    class Zdarzenie
+    public class Zdarzenie
     {
         public OpisStanu OpisStanu { get; set; }
 

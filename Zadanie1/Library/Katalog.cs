@@ -6,7 +6,7 @@ using System.Text;
 //klasa opisująca katalog książek
 namespace Library
 {
-    class Katalog
+    public class Katalog
     {
         //klucz główny
         public string Isbn
