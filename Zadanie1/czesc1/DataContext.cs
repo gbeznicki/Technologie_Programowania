@@ -10,9 +10,9 @@ namespace czesc1
 {
     public class DataContext
     {
-        public List<Wykaz> wykaz;
-        public Dictionary<string, Katalog> katalog;
-        public ObservableCollection<Zdarzenie> zdarzenia;
-        public List<OpisStanu> opisyStanu;
+        public List<BookReader> bookReaders;
+        public Dictionary<string, Book> books;
+        public ObservableCollection<Event> events;
+        public List<BookState> bookStates;
     }
 }

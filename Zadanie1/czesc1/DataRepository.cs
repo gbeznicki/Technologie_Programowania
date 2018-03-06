@@ -8,6 +8,6 @@ namespace czesc1
 {
     class DataRepository
     {
-        private DataContext dataContext;
+        private DataContext data;
     }
 }
