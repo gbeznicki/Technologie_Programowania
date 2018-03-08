@@ -9,24 +9,27 @@ namespace Library
     class Katalog
     {
         //klucz główny
+
+        private string isbn;
+
+
         public string Isbn
         {
-            get; set;
+            get => isbn;
+            set => isbn = value;
         }
 
-        public string Title
-        {
-            get; set;
-        }
+        private string Title;
 
-        public string Author
-        {
-            get; set;
-        }
+        public string Title1 { get => Title; set => Title = value; }
 
-        public int ReleaseYear
-        {
-            get; set;
-        }
+        private string Author;
+
+        public string Author1 { get => Author; set => Author = value; }
+
+        private int releaseYear;
+
+        public int ReleaseYear { get => releaseYear; set => releaseYear = value; }
+
     }
 }
