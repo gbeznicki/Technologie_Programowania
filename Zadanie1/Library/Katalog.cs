@@ -11,25 +11,16 @@ namespace Library
         //klucz główny
 
         private string isbn;
-
-
-        public string Isbn
-        {
-            get => isbn;
-            set => isbn = value;
-        }
-
-        private string Title;
-
-        public string Title1 { get => Title; set => Title = value; }
-
-        private string Author;
-
-        public string Author1 { get => Author; set => Author = value; }
-
+        private string author;
         private int releaseYear;
+        private string title;
+
+        public string Isbn { get => isbn; set => isbn = value; }
+
+        public string Author { get => author; set => author = value; }
+
+        public string Title { get => title; set => title = value; }
 
         public int ReleaseYear { get => releaseYear; set => releaseYear = value; }
-
     }
 }
