@@ -8,24 +8,29 @@ namespace Library
 {
     class Wykaz
     {
+        private int _age;
+        private string _firstName;
+        private string _surname;
+        private string _telephone;
+
         public int Age
         {
-            get; set;
+            get => _age; set => _age = value;
         }
 
         public string FirstName
         {
-            get; set;
+            get => _firstName; set => _firstName = value;
         }
 
         public string Surname
         {
-            get; set;
+            get => _surname; set => _surname = value;
         }
 
         public string Telephone
         {
-            get; set;
+            get => _telephone; set => _telephone = value;
         }
 
     }

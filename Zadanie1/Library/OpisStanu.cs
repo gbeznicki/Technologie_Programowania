@@ -7,19 +7,23 @@ namespace Library
 {
     class OpisStanu
     {
-        public string BookDescription
-        {
-            get; set;
-        }
+        private string bookDescritpion;
+        private DateTime dateOfPurchase;
+        private Katalog catalogue;
+
+        public string BookDescritpion { get => bookDescritpion; set => bookDescritpion = value; }
 
         public DateTime DateOfPurchase
         {
-            get; set;
+            get => dateOfPurchase;
+            set => dateOfPurchase = value;
         }
 
         public Katalog Catalogue
         {
-            get; set;
+            get => catalogue;
+            set => catalogue = value;
         }
+
     }
 }
