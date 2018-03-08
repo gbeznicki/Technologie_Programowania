@@ -6,13 +6,8 @@ using System.Threading.Tasks;
 
 namespace czesc1
 {
-    public class DataRepository
+    public abstract class DataFiller
     {
-        private DataContext data;
-
-        private DataContext Data
-        {
-            set => data = value;
-        }
+        public abstract void Fill(DataContext context);
     }
 }

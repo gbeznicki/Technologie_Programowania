@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace czesc1
 {
-    public class DataRepository
+    public class ConstDataFiller : DataFiller
     {
-        private DataContext data;
-
-        private DataContext Data
+        public override void Fill(DataContext context)
         {
-            set => data = value;
+            var bookReaders = context.bookReaders;
+            
         }
     }
 }
