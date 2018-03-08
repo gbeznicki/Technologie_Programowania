@@ -7,6 +7,9 @@ namespace Library
     class Zdarzenie
     {
         private OpisStanu opisStanu;
+        public Wykaz wykaz;
+        private DateTime borrowTime;
+        private DateTime returnTime;
 
         public OpisStanu OpisStanu
         {
@@ -14,23 +17,17 @@ namespace Library
             set => opisStanu = value;
         }
 
-        public Wykaz wykaz;
-
         public Wykaz Wykaz
         {
             get => wykaz;
             set => wykaz = value;
         }
 
-        private DateTime borrowTime;
-
         public DateTime BorrowTime
         {
             get => borrowTime;
             set => borrowTime = value;
         }
-
-        private DateTime returnTime;
 
         public DateTime ReturnTime
         {
