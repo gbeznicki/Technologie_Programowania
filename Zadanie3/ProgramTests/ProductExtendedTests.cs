@@ -46,5 +46,18 @@ namespace Program.Tests
             }
 
         }
+
+        [TestMethod()]
+        public void GetProductsWithoutCategoryTest()
+        {
+            var allProducts = (from p in Tools.DataContext.Product
+                select p).ToList();
+
+            var productsWithoutCategory = allProducts.GetProductsWithoutCategory();
+
+            int expectedCount = 209;
+
+            Assert.AreEqual(expectedCount, productsWithoutCategory.Count);
+        }
     }
 }

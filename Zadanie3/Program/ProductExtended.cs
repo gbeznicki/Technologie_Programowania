@@ -24,5 +24,11 @@ namespace Program
             }
 
         }
+
+        public static List<Product> GetProductsWithoutCategory(this List<Product> products)
+        {
+            var productsWithoutCategory = products.Where(p => p.ProductSubcategoryID is null).ToList();
+            return productsWithoutCategory;
+        }
     }
 }
