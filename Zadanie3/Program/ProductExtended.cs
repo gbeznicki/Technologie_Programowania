@@ -10,7 +10,6 @@ namespace Program
     {
         public static List<Product> PodzielNaStrony(this List<Product> products, int rozmiar, int nrStrony)
         {
-            // todo : zaimplementować przypadek dla strony mniejszej od rozmiar
             int poczatek = rozmiar * (nrStrony - 1);
             int ileRekordow = products.Count;
             if (ileRekordow < rozmiar * nrStrony)
