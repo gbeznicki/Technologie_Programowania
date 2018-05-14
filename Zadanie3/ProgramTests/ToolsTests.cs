@@ -91,28 +91,116 @@ namespace ProgramTests
             Assert.AreEqual(productVendor, toTestString);
         }
 
+        /*
+       select prod.ProductID
+       from Production.Product prod, Production.ProductReview rev
+       where prod.ProductID = rev.ProductID
+       group by prod.ProductID
+       having count(*) = 1
+        */
         [TestMethod()]
         public void GetProductsWithNRecentReviewsTest()
         {
-            Assert.Fail();
+            int number = 1;
+            var products = Tools.GetProductsWithNRecentReviews(number);
+
+            List<int> expectedProductIds = new List<int>()
+            {
+                709,
+                798
+            };
+            int expectedCount = 2;
+
+            Assert.AreEqual(expectedCount, products.Count);
+
+            foreach (var product in products)
+            {
+                expectedProductIds.Contains(product.ProductID);
+            }
         }
 
+        /*
+         select top 3 prod.ProductID, rev.ReviewDate
+        from Production.Product prod, Production.ProductReview rev
+        where prod.ProductID = rev.ProductID
+        order by rev.ReviewDate desc
+
+            testujemy dla 3 produktów
+         */
         [TestMethod()]
         public void GetNRecentlyReviewedProductsTest()
         {
-            Assert.Fail();
+            int number = 3;
+            var products = Tools.GetNRecentlyReviewedProducts(number);
+
+            List<int> expectedProductIds = new List<int>()
+            {
+                937,
+                798
+            };
+
+            Assert.AreEqual(number, products.Count);
+
+            foreach (var product in products)
+            {
+                Assert.IsTrue(expectedProductIds.Contains(product.ProductID));
+            }
         }
 
+        /*
+        select top 12 p.Name
+        from Production.Product p, Production.ProductSubcategory ps, Production.ProductCategory pc
+        where p.ProductSubcategoryID = ps.ProductSubcategoryID and ps.ProductCategoryID = pc.ProductCategoryID and pc.Name = 'Bikes'
+        order by p.Name asc
+
+            testujemy dla kategorii Bikes i 12 produktów
+         */
         [TestMethod()]
         public void GetNProductsFromCategoryTest()
         {
-            Assert.Fail();
+            int number = 12;
+            string category = "Bikes";
+            var products = Tools.GetNProductsFromCategory(category, number);
+
+            List<int> expectedProductIds = new List<int>()
+            {
+                775,
+                776,
+                777,
+                778,
+                771,
+                772,
+                773,
+                774,
+                782,
+                783,
+                784,
+                779,
+            };
+
+            Assert.AreEqual(number, products.Count);
+
+            foreach (var product in products)
+            {
+                Assert.IsTrue(expectedProductIds.Contains(product.ProductID));
+            }
         }
 
+        /*
+        select sum(p.StandardCost)
+        from Production.Product p, Production.ProductSubcategory ps, Production.ProductCategory pc
+        where p.ProductSubcategoryID = ps.ProductSubcategoryID and ps.ProductCategoryID = pc.ProductCategoryID and pc.Name = 'Bikes'
+
+            testujemy dla kategorii Bikes
+         */
         [TestMethod()]
         public void GetTotalStandardCostByCategoryTest()
         {
-            Assert.Fail();
+            var category = Tools.DataContext.ProductCategory.First(c => c.Name.Equals("Bikes"));
+            var cost = Tools.GetTotalStandardCostByCategory(category);
+
+            int expectedCost = 92092;
+            Assert.AreEqual(expectedCost, cost);
         }
 
     }

@@ -74,10 +74,10 @@ namespace Program
             string vendorNames = "";
             var vendors =
                 (from v in DataContext.Vendor
-                    join pv in DataContext.ProductVendor on v.BusinessEntityID equals pv.BusinessEntityID
-                    join p in DataContext.Product on pv.ProductID equals p.ProductID
-                    where p.Name.Contains(productName)
-                    select v.Name).Distinct().ToList();
+                 join pv in DataContext.ProductVendor on v.BusinessEntityID equals pv.BusinessEntityID
+                 join p in DataContext.Product on pv.ProductID equals p.ProductID
+                 where p.Name.Contains(productName)
+                 select v.Name).Distinct().ToList();
             foreach (var itVendor in vendors)
             {
                 vendorNames += itVendor + "\n";
@@ -87,43 +87,34 @@ namespace Program
 
         public static List<Product> GetProductsWithNRecentReviews(int howManyRewievs)
         {
-            return null;
+            var productIds = (from p in DataContext.Product
+                              join pr in DataContext.ProductReview on p.ProductID equals pr.ProductID
+                              group p by p.ProductID into g
+                              where g.Count() == howManyRewievs
+                              select g.Key).ToList();
+            var products = (from p in DataContext.Product
+                            where productIds.Contains(p.ProductID)
+                            select p).ToList();
+            return products;
         }
 
         public static List<Product> GetNRecentlyReviewedProducts(int howManyProducts)
         {
-            var productQuery = (from p in DataContext.Product
-                                join pr in DataContext.ProductReview on p.ProductID equals pr.ProductID
-                                orderby pr.ReviewDate descending
-                                select p).Take(howManyProducts);
-
-            List<Product> products = new List<Product>();
-            foreach (var product in productQuery)
-            {
-                products.Add(product);
-            }
-
-            // ??
-            //List<Product> products = productQuery.ToList();
-
+            var products = (from p in DataContext.Product
+                            join pr in DataContext.ProductReview on p.ProductID equals pr.ProductID
+                            orderby pr.ReviewDate descending
+                            select p).Take(howManyProducts).ToList();
             return products;
         }
 
         public static List<Product> GetNProductsFromCategory(string categoryName, int n)
         {
-            var query = (from p in DataContext.Product
-                         join ps in DataContext.ProductSubcategory on p.ProductSubcategoryID equals ps.ProductSubcategoryID
-                         join pc in DataContext.ProductCategory on ps.ProductCategoryID equals pc.ProductCategoryID
-                         orderby p.Name ascending
-                         where pc.Name.Equals(categoryName)
-                         select p).Take(n);
-
-            List<Product> products = new List<Product>();
-            foreach (var product in query)
-            {
-                products.Add(product);
-            }
-
+            var products = (from p in DataContext.Product
+                            join ps in DataContext.ProductSubcategory on p.ProductSubcategoryID equals ps.ProductSubcategoryID
+                            join pc in DataContext.ProductCategory on ps.ProductCategoryID equals pc.ProductCategoryID
+                            orderby p.Name ascending
+                            where pc.Name.Equals(categoryName)
+                            select p).Take(n).ToList();
             return products;
         }
 
