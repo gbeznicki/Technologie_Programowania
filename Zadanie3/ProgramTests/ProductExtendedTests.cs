@@ -20,30 +20,42 @@ namespace Program.Tests
         [TestMethod()]
         public void PodzielNaStronyTest()
         {
+            // przypadek 1: ilość wyników na stronie mniejsza od rozmiaru strony
             int rozmiarStrony = 5;
-            int nrStrony = 5;
+            int nrStrony = 6;
             int poczatekPrzedzialu = (nrStrony - 1) * rozmiarStrony;
             List<Product> productsByVendorName = Tools.GetProductsByVendorName("bicycles");
             int ileRekordow = productsByVendorName.Count;
 
-            List<Product> productsPage =
+            List<Product> productsPage6 =
                 Tools.GetProductsByVendorName("bicycles")
                     .PodzielNaStrony(rozmiarStrony, nrStrony);
 
-            if (ileRekordow > nrStrony * rozmiarStrony)
+            int expectedSize = 1;
+                Assert.AreEqual(productsPage6.Count, expectedSize);
+
+            for (int i = poczatekPrzedzialu; i < poczatekPrzedzialu + expectedSize; i++)
             {
-                Assert.AreEqual(productsPage.Count, rozmiarStrony);
-            }
-            else
-            {
-                Assert.AreEqual(productsPage.Count, ileRekordow - rozmiarStrony * nrStrony);
+                Assert.IsTrue(productsPage6.Contains(productsByVendorName[i]));
             }
 
+            // przypadek 2: ilość wyników na stronie równa rozmiarowi strony
+            nrStrony = 5;
+            poczatekPrzedzialu = (nrStrony - 1) * rozmiarStrony;
 
-            for (int i = poczatekPrzedzialu; i < poczatekPrzedzialu + rozmiarStrony; i++)
+            List<Product> productsPage5 =
+                Tools.GetProductsByVendorName("bicycles")
+                    .PodzielNaStrony(rozmiarStrony, nrStrony);
+
+            int expectedSize2 = rozmiarStrony;
+
+            Assert.AreEqual(productsPage5.Count, expectedSize2);
+
+            for (int i = poczatekPrzedzialu; i < poczatekPrzedzialu + expectedSize2; i++)
             {
-                Assert.IsTrue(productsPage.Contains(productsByVendorName[i]));
+                Assert.IsTrue(productsPage5.Contains(productsByVendorName[i]));
             }
+
 
         }
 

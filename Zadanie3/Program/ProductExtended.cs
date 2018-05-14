@@ -13,9 +13,18 @@ namespace Program
             // todo : zaimplementować przypadek dla strony mniejszej od rozmiar
             int poczatek = rozmiar * (nrStrony - 1);
             int ileRekordow = products.Count;
-            if (ileRekordow + rozmiar < rozmiar * nrStrony)
+            if (ileRekordow < rozmiar * nrStrony)
             {
-                throw new Exception("Przekroczono zakres wyników");
+                if (ileRekordow + rozmiar > rozmiar * nrStrony)
+                {
+                    int nowyRozmiar = ileRekordow + rozmiar - rozmiar * nrStrony;
+                    List<Product> outProducts = products.GetRange(poczatek, nowyRozmiar);
+                    return outProducts;
+                }
+                else
+                {
+                    throw new Exception("Przekroczono zakres wyników");
+                }
             }
             else
             {
