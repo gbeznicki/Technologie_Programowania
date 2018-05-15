@@ -1,12 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Program;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Program;
 
-namespace Program.Tests
+//todo: test do ostatniej metody z metod rozszerzających
+
+namespace ProgramTests
 {
     [TestClass()]
     public class ProductExtendedTests
@@ -71,5 +70,6 @@ namespace Program.Tests
 
             Assert.AreEqual(expectedCount, productsWithoutCategory.Count);
         }
+
     }
 }

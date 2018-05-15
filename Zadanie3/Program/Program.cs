@@ -26,18 +26,18 @@ namespace Program
             }
             Console.WriteLine("-----------------------------------------------");
 
-            try
-            {
-                var podzielonaLista = lista2.PodzielNaStrony(5, 6);
-                foreach (var itProduct in podzielonaLista)
-                {
-                    Console.WriteLine(itProduct.Name);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            //try
+            //{
+            //    var podzielonaLista = lista2.PodzielNaStrony(5, 6);
+            //    foreach (var itProduct in podzielonaLista)
+            //    {
+            //        Console.WriteLine(itProduct.Name);
+            //    }
+            //}
+            //catch (Exception e)
+            //{
+            //    Console.WriteLine(e);
+            //}
 
 
             var categories = dc.ProductCategory.Where(c => c.Name.Equals("Bikes")).ToList();
@@ -53,6 +53,9 @@ namespace Program
             //Console.WriteLine(vendorsForGivenProductName);
 
             //Console.ReadKey();
+
+            Console.WriteLine(lista2.GetProductAndVendorString());
+
         }
     }
 }

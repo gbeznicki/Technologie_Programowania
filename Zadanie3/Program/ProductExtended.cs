@@ -38,5 +38,38 @@ namespace Program
             var productsWithoutCategory = products.Where(p => p.ProductSubcategoryID is null).ToList();
             return productsWithoutCategory;
         }
+
+        public static string GetProductAndVendorString(this List<Product> products)
+        {
+            BazaDanychDataContext dataContext = new BazaDanychDataContext();
+
+            string outString = "";
+
+            List<int> productIds = new List<int>();
+            foreach (var product in products)
+            {
+                productIds.Add(product.ProductID);
+            }
+
+            var productVendor =
+                (from v in dataContext.Vendor
+                    join pv in dataContext.ProductVendor on v.BusinessEntityID equals pv.BusinessEntityID
+                    join p in dataContext.Product on pv.ProductID equals p.ProductID
+                    where productIds.Contains(p.ProductID)
+                    select new
+                    {
+                        productName = p.Name,
+                        vendorName = v.Name
+                    }).Distinct().ToList();
+            foreach (var it in productVendor)
+            {
+                outString += it.productName + "-" + it.vendorName + "\n";
+            }
+
+            return outString;
+        }
+
+
+
     }
 }
