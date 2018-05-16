@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// todo dodatkowa metoda jak w tools
+
 namespace Program
 {
     public class MyTools
@@ -29,5 +31,7 @@ namespace Program
 
             return myProductsForVendor;
         }
+
+
     }
 }

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// todo test do metody z mytools
+
 namespace Program.Tests
 {
     [TestClass()]

@@ -3,8 +3,6 @@ using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Program;
 
-//todo: test do ostatniej metody z metod rozszerzających
-
 namespace ProgramTests
 {
     [TestClass()]
@@ -31,7 +29,7 @@ namespace ProgramTests
                     .PodzielNaStrony(rozmiarStrony, nrStrony);
 
             int expectedSize = 1;
-                Assert.AreEqual(productsPage6.Count, expectedSize);
+            Assert.AreEqual(productsPage6.Count, expectedSize);
 
             for (int i = poczatekPrzedzialu; i < poczatekPrzedzialu + expectedSize; i++)
             {
@@ -62,7 +60,7 @@ namespace ProgramTests
         public void GetProductsWithoutCategoryTest()
         {
             var allProducts = (from p in Tools.DataContext.Product
-                select p).ToList();
+                               select p).ToList();
 
             var productsWithoutCategory = allProducts.GetProductsWithoutCategory();
 
@@ -70,6 +68,16 @@ namespace ProgramTests
 
             Assert.AreEqual(expectedCount, productsWithoutCategory.Count);
         }
+
+        [TestMethod()]
+        public void GetProductAndVendorStringTest()
+        {
+            var productsByName = Tools.GetProductByName("headset");
+            string productVendorString = productsByName.GetProductAndVendorString();
+            
+            Assert.AreEqual(productVendorString, "Headset Ball Bearings-American Bicycles and Wheels\n");
+        }
+
 
     }
 }

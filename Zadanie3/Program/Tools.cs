@@ -32,31 +32,26 @@ namespace Program
         //tabele Production.Product, Purchasing.ProductVendor, Purchasing.Vendor
         public static List<Product> GetProductsByVendorName(string vendorName)
         {
-            var vendor = dataContext.Vendor
-                .Where(v => v.Name.Contains(vendorName))
-                .Select(n => n.BusinessEntityID)
-                .ToList();
-            var productVendor = dataContext.ProductVendor
-                .Where(pv => vendor.Contains(pv.BusinessEntityID));
-            var productIDs = productVendor.Select(n => n.ProductID)
-                .ToList();
-            List<Product> outProducts = dataContext.Product
-                .Where(p => productIDs.Contains(p.ProductID))
-                .OrderBy(p => p.Name)
-                .ToList();
+            //var vendor = dataContext.Vendor
+            //    .Where(v => v.Name.Contains(vendorName))
+            //    .Select(n => n.BusinessEntityID)
+            //    .ToList();
+            //var productVendor = dataContext.ProductVendor
+            //    .Where(pv => vendor.Contains(pv.BusinessEntityID));
+            //var productIDs = productVendor.Select(n => n.ProductID)
+            //    .ToList();
+            //List<Product> outProducts = dataContext.Product
+            //    .Where(p => productIDs.Contains(p.ProductID))
+            //    .OrderBy(p => p.Name)
+            //    .ToList();
 
-            // nie wiem dlaczemu to nie dziala :(
-            //List<Product> outProducts =
-            //(from product in dataContext.Product
-            //    where product.ProductID == (
-            //              from productVendor in dataContext.ProductVendor
-            //              where productVendor.BusinessEntityID
-            //                  .Equals(
-            //                  from vendor in dataContext.Vendor
-            //                  where vendor.Name == vendorName
-            //                  select vendor.BusinessEntityID) 
-            //              select productVendor.ProductID)
-            //    select product).ToList();
+            List<Product> outProducts =
+                (from v in DataContext.Vendor
+                 join pv in DataContext.ProductVendor on v.BusinessEntityID equals pv.BusinessEntityID
+                 join p in DataContext.Product on pv.ProductID equals p.ProductID
+                 where v.Name.Contains(vendorName)
+                 select p).ToList();
+
             return outProducts;
 
         }

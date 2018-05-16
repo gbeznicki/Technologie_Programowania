@@ -14,28 +14,23 @@ namespace Program
             Tools.DataContext = dc;
             MyTools.DataContext = dc;
 
-            // przygotowanie listy MyProduct
-            List<MyProduct> myProducts = new List<MyProduct>();
+            //// przygotowanie listy MyProduct
+            //List<MyProduct> myProducts = new List<MyProduct>();
 
-            var allProducts = dc.Product.ToList();
+            //var allProducts = dc.Product.ToList();
 
-            foreach (var product in allProducts)
-            {
-                myProducts.Add(new MyProduct(product));
-            }
-
-            var myProductsByName = MyTools.GetProductsByVendorName(myProducts, "Australia Bike Retailer");
-            foreach (var myProduct in myProductsByName)
-            {
-                Console.WriteLine(myProduct.Name);
-            }
-
-
-            //var lista = Tools.GetProductByName("Headset");
-            //foreach (var itProduct in lista)
+            //foreach (var product in allProducts)
             //{
-            //    //Console.WriteLine(itProduct.Name);
+            //    myProducts.Add(new MyProduct(product));
             //}
+
+            //var myProductsByName = MyTools.GetProductsByVendorName(myProducts, "Australia Bike Retailer");
+            //foreach (var myProduct in myProductsByName)
+            //{
+            //    Console.WriteLine(myProduct.Name);
+            //}
+
+
 
             //var lista2 = Tools.GetProductsByVendorName("bicycles");
             //foreach (var itProduct in lista2)
@@ -70,9 +65,11 @@ namespace Program
             //var vendorsForGivenProductName = Tools.GetProductVendorByProductName("Crankarm");
             ////Console.WriteLine(vendorsForGivenProductName);
 
-            ////Console.ReadKey();
+            //Console.ReadKey();
 
-            //Console.WriteLine(lista2.GetProductAndVendorString());
+            var lista = Tools.GetProductByName("Headset");
+
+            Console.WriteLine(lista.GetProductAndVendorString());
 
         }
     }
