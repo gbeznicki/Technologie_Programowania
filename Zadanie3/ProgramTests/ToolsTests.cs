@@ -120,7 +120,7 @@ namespace ProgramTests
         }
 
         /*
-         select top 3 prod.ProductID, rev.ReviewDate
+        select top 3 prod.ProductID, rev.ReviewDate
         from Production.Product prod, Production.ProductReview rev
         where prod.ProductID = rev.ProductID
         order by rev.ReviewDate desc

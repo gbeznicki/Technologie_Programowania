@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-
-// todo dodatkowa metoda jak w tools
 
 namespace Program
 {
@@ -32,6 +32,29 @@ namespace Program
             return myProductsForVendor;
         }
 
+        public static List<MyProduct> GetNRecentlyReviewedProducts(List<MyProduct> myProducts, int howManyProducts)
+        {
+            var products =
+                (from p in DataContext.Product
+                 join pr in DataContext.ProductReview on p.ProductID equals pr.ProductID
+                 orderby pr.ReviewDate descending
+                 select p.ProductID).Take(howManyProducts).ToList();
+
+            List<MyProduct> outProducts = new List<MyProduct>();
+
+            for (int i = 0; i < myProducts.Count; i++)
+            {
+                for (int j = 0; j < products.Count; j++)
+                {
+                    if (products[j] == myProducts[i].ProductID)
+                    {
+                        outProducts.Add(myProducts[i]);
+                    }
+                }
+            }
+
+            return outProducts; ;
+        }
 
     }
 }

@@ -6,8 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-// todo test do metody z mytools
-
 namespace Program.Tests
 {
     [TestClass()]
@@ -87,6 +85,27 @@ namespace Program.Tests
             foreach (var myProduct in result)
             {
                 Assert.IsTrue(expectedIds.Contains(myProduct.ProductID));
+            }
+        }
+
+        [TestMethod()]
+        public void GetNRecentlyReviewedProductsTest()
+        {
+            int number = 3;
+            var products = MyTools.GetNRecentlyReviewedProducts(myProducts, number);
+
+
+            List<int> expectedProductIds = new List<int>()
+            {
+                937,
+                798
+            };
+
+            Assert.AreEqual(number, products.Count);
+
+            foreach (var product in products)
+            {
+                Assert.IsTrue(expectedProductIds.Contains(product.ProductID));
             }
         }
     }

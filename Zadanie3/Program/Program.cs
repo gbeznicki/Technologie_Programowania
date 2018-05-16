@@ -13,6 +13,14 @@ namespace Program
             var dc = new BazaDanychDataContext();
             Tools.DataContext = dc;
             MyTools.DataContext = dc;
+            List<MyProduct> myProducts = new List<MyProduct>();
+
+            // wypełnienie listy MyProduct
+            foreach (var product in dc.Product.ToList())
+            {
+                myProducts.Add(new MyProduct(product));
+            }
+
 
             //// przygotowanie listy MyProduct
             //List<MyProduct> myProducts = new List<MyProduct>();
@@ -69,8 +77,16 @@ namespace Program
 
             var lista = Tools.GetProductByName("Headset");
 
-            Console.WriteLine(lista.GetProductAndVendorString());
+            //Console.WriteLine(lista.GetProductAndVendorString());
 
+            int number = 5;
+            var myProducts1 = MyTools.GetNRecentlyReviewedProducts(myProducts, number);
+            var products = Tools.GetNRecentlyReviewedProducts(number);
+
+            foreach (var itProduct in myProducts1)
+            {
+                Console.WriteLine(itProduct.Name);
+            }
         }
     }
 }
