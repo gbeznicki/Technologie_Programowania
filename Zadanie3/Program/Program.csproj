@@ -49,6 +49,7 @@
       <DependentUpon>BazaDanych.dbml</DependentUpon>
     </Compile>
     <Compile Include="MyProduct.cs" />
+    <Compile Include="MyTools.cs" />
     <Compile Include="ProductExtended.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

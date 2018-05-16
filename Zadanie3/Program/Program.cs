@@ -12,49 +12,67 @@ namespace Program
         {
             var dc = new BazaDanychDataContext();
             Tools.DataContext = dc;
+            MyTools.DataContext = dc;
 
-            var lista = Tools.GetProductByName("Headset");
-            foreach (var itProduct in lista)
+            // przygotowanie listy MyProduct
+            List<MyProduct> myProducts = new List<MyProduct>();
+
+            var allProducts = dc.Product.ToList();
+
+            foreach (var product in allProducts)
             {
-                //Console.WriteLine(itProduct.Name);
+                myProducts.Add(new MyProduct(product));
             }
 
-            var lista2 = Tools.GetProductsByVendorName("bicycles");
-            foreach (var itProduct in lista2)
+            var myProductsByName = MyTools.GetProductsByVendorName(myProducts, "Australia Bike Retailer");
+            foreach (var myProduct in myProductsByName)
             {
-                Console.WriteLine(itProduct.Name);
+                Console.WriteLine(myProduct.Name);
             }
-            Console.WriteLine("-----------------------------------------------");
-
-            //try
-            //{
-            //    var podzielonaLista = lista2.PodzielNaStrony(5, 6);
-            //    foreach (var itProduct in podzielonaLista)
-            //    {
-            //        Console.WriteLine(itProduct.Name);
-            //    }
-            //}
-            //catch (Exception e)
-            //{
-            //    Console.WriteLine(e);
-            //}
 
 
-            var categories = dc.ProductCategory.Where(c => c.Name.Equals("Bikes")).ToList();
-
-            var lista3 = Tools.GetTotalStandardCostByCategory(categories[0]);
-            //Console.WriteLine(lista3);
+            //var lista = Tools.GetProductByName("Headset");
             //foreach (var itProduct in lista)
+            //{
+            //    //Console.WriteLine(itProduct.Name);
+            //}
+
+            //var lista2 = Tools.GetProductsByVendorName("bicycles");
+            //foreach (var itProduct in lista2)
             //{
             //    Console.WriteLine(itProduct.Name);
             //}
+            //Console.WriteLine("-----------------------------------------------");
 
-            var vendorsForGivenProductName = Tools.GetProductVendorByProductName("Crankarm");
-            //Console.WriteLine(vendorsForGivenProductName);
+            ////try
+            ////{
+            ////    var podzielonaLista = lista2.PodzielNaStrony(5, 6);
+            ////    foreach (var itProduct in podzielonaLista)
+            ////    {
+            ////        Console.WriteLine(itProduct.Name);
+            ////    }
+            ////}
+            ////catch (Exception e)
+            ////{
+            ////    Console.WriteLine(e);
+            ////}
 
-            //Console.ReadKey();
 
-            Console.WriteLine(lista2.GetProductAndVendorString());
+            //var categories = dc.ProductCategory.Where(c => c.Name.Equals("Bikes")).ToList();
+
+            //var lista3 = Tools.GetTotalStandardCostByCategory(categories[0]);
+            ////Console.WriteLine(lista3);
+            ////foreach (var itProduct in lista)
+            ////{
+            ////    Console.WriteLine(itProduct.Name);
+            ////}
+
+            //var vendorsForGivenProductName = Tools.GetProductVendorByProductName("Crankarm");
+            ////Console.WriteLine(vendorsForGivenProductName);
+
+            ////Console.ReadKey();
+
+            //Console.WriteLine(lista2.GetProductAndVendorString());
 
         }
     }
