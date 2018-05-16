@@ -21,10 +21,13 @@ namespace Program
 
         public static List<MyProduct> GetProductsByVendorName(List<MyProduct> myProducts, string vendorName)
         {
-            var vendorId = dataContext.Vendor.Where(v => v.Name.Equals(vendorName)).Select(v => v.BusinessEntityID)
+            var vendorId = dataContext.Vendor
+                .Where(v => v.Name.Equals(vendorName))
+                .Select(v => v.BusinessEntityID)
                 .First();
 
-            var productIdsForVendor = dataContext.ProductVendor.Where(pv => pv.BusinessEntityID == vendorId)
+            var productIdsForVendor = dataContext.ProductVendor
+                .Where(pv => pv.BusinessEntityID == vendorId)
                 .Select(pv => pv.ProductID).ToList();
 
             var myProductsForVendor = myProducts.Where(mp => productIdsForVendor.Contains(mp.ProductID)).ToList();
@@ -34,7 +37,7 @@ namespace Program
 
         public static List<MyProduct> GetNRecentlyReviewedProducts(List<MyProduct> myProducts, int howManyProducts)
         {
-            var products =
+            var productIds =
                 (from p in DataContext.Product
                  join pr in DataContext.ProductReview on p.ProductID equals pr.ProductID
                  orderby pr.ReviewDate descending
@@ -42,18 +45,13 @@ namespace Program
 
             List<MyProduct> outProducts = new List<MyProduct>();
 
-            for (int i = 0; i < myProducts.Count; i++)
+            foreach (var productId in productIds)
             {
-                for (int j = 0; j < products.Count; j++)
-                {
-                    if (products[j] == myProducts[i].ProductID)
-                    {
-                        outProducts.Add(myProducts[i]);
-                    }
-                }
+                var myProduct = myProducts.First(mp => mp.ProductID == productId);
+                outProducts.Add(myProduct);
             }
 
-            return outProducts; ;
+            return outProducts;
         }
 
     }
